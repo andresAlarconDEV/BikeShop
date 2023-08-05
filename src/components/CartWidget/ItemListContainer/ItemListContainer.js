@@ -1,14 +1,16 @@
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 
  function ItemListContainer(props) {
-  
+
 return (
-    <Container fluid className="justify-content-md-center">
-      <Row>
-        <Col>1 of 1</Col>
-      </Row>
+    <Container fluid className="justify-content-md-center" style= {{background: "lightgrey"}}>
+      <div style= {{margin:"250px auto 20px",textAlign:"center"}}>
+        <h1>{props.greeting}</h1>
+      </div>
+      <div style= {{margin:"20px auto 20px",textAlign:"center"}}>
+        <h2>{props.construccion}</h2>
+      </div>
     </Container>
   );
 }

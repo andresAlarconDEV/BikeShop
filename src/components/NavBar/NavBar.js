@@ -23,9 +23,9 @@ function NavBar() {
               <NavDropdown.Item href="#action/3.3">Seguridad</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Servicios" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Grupeta</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">acompañamiento Motorizado</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Taller</NavDropdown.Item>
+              <NavDropdown.Item href="#action/4.1">Grupeta</NavDropdown.Item>
+              <NavDropdown.Item href="#action/4.2">acompañamiento Motorizado</NavDropdown.Item>
+              <NavDropdown.Item href="#action/4.3">Taller</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <CartWidget />
