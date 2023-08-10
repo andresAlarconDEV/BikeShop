@@ -4,14 +4,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from "./components/NavBar/NavBar";
-import ItemListContainer from './components/CartWidget/ItemListContainer/ItemListContainer';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <NavBar />
-    <ItemListContainer greeting={"Bienvenidos a Bike Shop"} construccion={"Nos encontramos en la construcción de nuestro inventario, pronto estaremos disponibles para ti"}/>
+    <App />
   </React.StrictMode>
 );
 
