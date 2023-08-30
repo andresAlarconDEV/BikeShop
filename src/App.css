@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #54585c !important;
+  }
+
+
+  .productos {
+    display: flex!important;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    margin-top: 40px;
+}
+
+  .card {
+    margin: 5px 0 5px 0;
+  }
