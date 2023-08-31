@@ -1,38 +1,39 @@
 import Container from 'react-bootstrap/Container';
-import Data from "../../data/productos.json";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import toUpper from '../../helpers/toUpper';
 import useId from '../../hooks/useId';
+import ItemCount from '../ItemCount/ItemCount';
 
 function ItemDetailContainer() {
-    const {productId} = useId()
+    const { productId } = useId()
 
 
     return (
         <Container>
             {
                 (productId) ?
-                    <Card className="text-center">
+                    <Card key={productId.id} style={{ width: "40%", margin: "auto" }} className="text-center">
                         <Card.Header>{productId.categoria}</Card.Header>
                         <Card.Body>
-                            <Card.Title>{toUpper(productId.nombre)}</Card.Title>
-                            <Card.Text>
+                            <Card.Title style={{ display: "flex", flexDirection: "column" }} >{toUpper(productId.nombre)}</Card.Title>
+                            <Card.Text style={{ display: "flex", flexDirection: "column" }}>
                                 {productId.descripcion}
                                 <Card.Img variant="top" src={productId.imagen} />
+                                ${productId.precio}
                             </Card.Text>
-                            <Link to={`/`}>
-                            <Button variant="primary">Regresar</Button>
-                            </Link>
+                            <ItemCount stock={productId.stock}></ItemCount>
+                                <Button variant="primary">Agregar a Carrito</Button>
                         </Card.Body>
-                        <Card.Footer >${productId.precio}</Card.Footer>
+                        <Card.Footer ><Link to={`/`}>
+                            <Button variant="primary">Regresar</Button>
+                        </Link></Card.Footer>
                     </Card>
                     : <Container><div>"Producto no encontrado o disponible en el momento"</div>
-                    <Link to={`/`}>
-                    <Button variant="primary">Regresar</Button>
-                    </Link></Container>
+                        <Link to={`/`}>
+                            <Button variant="primary">Regresar</Button>
+                        </Link></Container>
             }
         </Container>
     )

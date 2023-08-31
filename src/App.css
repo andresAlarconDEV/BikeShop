@@ -53,3 +53,17 @@
   .card {
     margin: 5px 0 5px 0;
   }
+
+
+    .containerButtons {
+      display: flex;
+      margin: 10px 0 10px 0;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .containerButtons div{
+    width: 20%;
+}
+
+  
