@@ -8,7 +8,8 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import TableItems from "./TableItems";
-import { Link } from "react-router-dom";
+
+import CarritoVacio from "../CarritoVacio";
 
 
 const Cart = () => {
@@ -54,10 +55,9 @@ const Cart = () => {
 
     return (
 
-        (!cartItems[0]) ? <><h1>El carrito de compras esta vacio</h1>
-        <Link to={`/`}>
-        <Button variant="primary">Regresar</Button>
-    </Link></> :
+        !(cartItems.length > 0) ? 
+        <CarritoVacio />
+            :
             <Container>
                 <h1 className="tituloCompra">DETALLE DE COMPRA</h1>
                 <TableItems />
@@ -103,7 +103,7 @@ const Cart = () => {
                             </InputGroup>
                         </Form.Group>
                     </Row>
-                    <div className="containerButtons">
+                    <div className="containerButtons2">
                         <Button type="button" className="btn btn-danger" onClick={() => clear()}>Eliminar orden</Button>
                         <Button type="button" className="btn btn-success" onClick={() => enviarPedido()}>Confirmar Compra</Button>
                     </div>
