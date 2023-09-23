@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Data from "../data/productos.json";
 import { useParams } from "react-router-dom";
 
 
@@ -9,7 +8,7 @@ function useId () {
     const [productId, setProductId] = useState(null)
 
     useEffect(() => {
-        setProductId(Data.find(product => product.id == id))
+        setProductId(Data.find(product => product.id === id))
 
     }, [id])
 

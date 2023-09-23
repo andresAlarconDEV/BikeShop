@@ -58,12 +58,48 @@
     .containerButtons {
       display: flex;
       margin: 10px 0 10px 0;
-      justify-content: center;
       align-items: center;
+      justify-content: space-evenly;
   }
 
   .containerButtons div{
     width: 20%;
 }
 
-  
+  .tituloCompra {
+    margin: 50px 0 50px 0;
+    text-align: center;
+  }
+
+  .imagenTienda {
+    width: 90%;
+    height: 65%;
+    margin: 15px auto;
+    overflow: hidden;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  .imagenTienda img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.loading {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.loading img{
+  width: 350px;
+  height: 255px;
+ 
+}

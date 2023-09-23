@@ -1,32 +1,51 @@
+import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
-import { Link, useParams } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import useList from '../../hooks/useList';
-
+import { useParams } from "react-router-dom";
+import ItemList from './ItemList';
+import Loading from '../Loading'
+import { getFirestore, getDocs, collection } from "firebase/firestore"
 
 function ItemListContainer(props) {
-  const {productos} = useList()
+  const { categoryId } = useParams()
+  const [productos, setProductos] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const db = getFirestore()
+
+    const refCollection = collection(db, "productos")
+
+    getDocs(refCollection)
+      .then(snapshot => {
+        if (snapshot.empty) { console.log("no resultados") }
+        else {
+        if (categoryId) {
+          const prodCategoria = snapshot.docs.filter(doc => doc.data().categoria === categoryId)
+          setProductos(prodCategoria.map(doc => {
+            return { id: doc.id, ...doc.data() }
+          }))
+        }
+        else {
+          setProductos(snapshot.docs.map(doc => {
+            return { id: doc.id, ...doc.data() }
+          })
+          )
+        }}
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [categoryId])
+
+  if (loading) return <Loading />
+
 
   return (
-    
+
     <Container className="productos d-flex flex-wrap">
-      {
-        productos.map(producto => (
-        <Card key={producto.id} style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={producto.imagen} />
-        <Card.Body>
-          <Card.Title>{producto.nombre}</Card.Title>
-          <Card.Text>${producto.precio}</Card.Text>
-          <Link to={`/item/${producto.id}`}>
-          <Button variant="primary">Detalle</Button>
-          </Link>
-        </Card.Body>
-      </Card>
-      ))
-      }
+      <ItemList productos={productos} />
     </Container>
-    
+
   );
 }
 

@@ -1,41 +1,44 @@
+import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
-import { Link, useParams } from "react-router-dom";
+import ItemDetail from './ItemDetail';
+import { useParams } from "react-router-dom";
+import { getFirestore, getDoc, doc } from "firebase/firestore"
+import Loading from '../Loading';
+import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import toUpper from '../../helpers/toUpper';
-import useId from '../../hooks/useId';
-import ItemCount from '../ItemCount/ItemCount';
+
 
 function ItemDetailContainer() {
-    const { productId } = useId()
+    const { id } = useParams()
+    const [productId, setProductId] = useState(null)
+    const [loading, setLoading] = useState(true)
+    // const { productId } = useId()
+    useEffect(() => {
+        const db = getFirestore()
+    
+        const refDoc = doc(db, "productos", id)
+
+        getDoc(refDoc)
+        .then(snapshot => {
+            setProductId({id: snapshot.id, ...snapshot.data()})
+        })
+        .finally(() => setLoading(false))
+    }, [])
+
+    if (loading) return <Loading />
 
 
     return (
+        (productId.nombre)?
         <Container>
-            {
-                (productId) ?
-                    <Card key={productId.id} style={{ width: "40%", margin: "auto" }} className="text-center">
-                        <Card.Header>{productId.categoria}</Card.Header>
-                        <Card.Body>
-                            <Card.Title style={{ display: "flex", flexDirection: "column" }} >{toUpper(productId.nombre)}</Card.Title>
-                            <Card.Text style={{ display: "flex", flexDirection: "column" }}>
-                                {productId.descripcion}
-                                <Card.Img variant="top" src={productId.imagen} />
-                                ${productId.precio}
-                            </Card.Text>
-                            <ItemCount stock={productId.stock}></ItemCount>
-                                <Button variant="primary">Agregar a Carrito</Button>
-                        </Card.Body>
-                        <Card.Footer ><Link to={`/`}>
-                            <Button variant="primary">Regresar</Button>
-                        </Link></Card.Footer>
-                    </Card>
-                    : <Container><div>"Producto no encontrado o disponible en el momento"</div>
-                        <Link to={`/`}>
-                            <Button variant="primary">Regresar</Button>
-                        </Link></Container>
-            }
-        </Container>
+            <h1>DETALLE</h1>
+            <ItemDetail productId={productId}/>
+        </Container>:
+        <Container><div>"Producto no encontrado o disponible en el momento"</div>
+            <Link to={`/`}>
+                <Button variant="primary">Regresar</Button>
+            </Link>
+            </Container>
     )
 }
 
